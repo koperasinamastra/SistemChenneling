@@ -2,27 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cabang;
-use App\Models\Debitur;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Contracts\DataTable;
-use DataTables;
 
-class DebiturController extends Controller
+class PengajuanPinjamanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-   public function index(Request $request)
+    public function index()
     {
-       $debitur = Debitur::all();
-
-       return view('debitur.debitur_index', [
-       'debitur' => $debitur
-       ]);
-       
+        return view('pengajuan.listPengajuan');
     }
 
     /**
@@ -32,8 +23,7 @@ class DebiturController extends Controller
      */
     public function create()
     {
-        $cabang = Cabang::all();
-        return view('debitur.create',compact('cabang'));
+        //
     }
 
     /**
@@ -91,5 +81,4 @@ class DebiturController extends Controller
     {
         //
     }
-
 }

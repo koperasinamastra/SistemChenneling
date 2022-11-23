@@ -3,6 +3,7 @@
 use App\Http\Controllers\CabangController;
 use App\Http\Controllers\DataMitraController;
 use App\Http\Controllers\DebiturController;
+use App\Http\Controllers\PengajuanPinjamanController;
 use App\Http\Controllers\UserController;
 use App\Models\Cabang;
 use Illuminate\Support\Facades\Auth;
@@ -34,4 +35,5 @@ Route::middleware('auth')->group(function(){
     Route::resource('mitra', DataMitraController::class);
     Route::resource('cabang', CabangController::class);
     Route::resource('debitur', DebiturController::class);
+    Route::resource('pengajuanpinjaman', PengajuanPinjamanController::class);
 });

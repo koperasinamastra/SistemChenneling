@@ -17,6 +17,7 @@ class DebiturFactory extends Factory
     public function definition()
     {
         return [
+            "no_pengajuan"=>$this->faker->randomNumber(9, true),
             "nama_debitur"=> $this->faker->name(),
             "noktp"=>$this->faker->randomNumber(9, true),
             "alamat"=>$this->faker->address(),

@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Cabang;
 
 class Debitur extends Model
 {
     use HasFactory;
     protected $fillable = [
+            'no_pengajuan',
             'nama_debitur',
+            'cabang_id',
             'noktp',
             'alamat',
             'tlp',
@@ -34,4 +37,10 @@ class Debitur extends Model
             'lama_bekerja',
             'penghasilan_bersih'
     ];
+
+    public function cabang()
+    {
+    return $this->belongsTo(Cabang::class,'cabang_id','id');
+    }
+    
 }

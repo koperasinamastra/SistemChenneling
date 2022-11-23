@@ -130,11 +130,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -234,7 +234,7 @@ return [
 
     'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
-    'right_sidebar_theme' => 'dark',
+    'right_sidebar_theme' => 'light',
     'right_sidebar_slide' => true,
     'right_sidebar_push' => true,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
@@ -382,7 +382,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Data Debitur',
-                    'url'  => '#',
+                    'url'  => '/debitur',
                 ],
                 [
                     'text' => 'Data Pengajuan Pinjaman',
@@ -461,7 +461,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => '//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js',
+                    'location' => '//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
@@ -471,7 +471,7 @@ return [
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => '//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css',
+                    'location' => '//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css',
                 ],
             ],
         ],

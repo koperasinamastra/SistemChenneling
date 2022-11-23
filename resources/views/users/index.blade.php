@@ -12,35 +12,38 @@
             <div class="card">
                 <div class="card-body">
 
-                    <a href="{{route('users.create')}}" class="btn btn-primary mb-2">
+                    <a href="{{ route('users.create') }}" class="btn btn-primary mb-2">
                         <i class="fa fa-plus" aria-hidden="true"></i> Tambah
                     </a>
 
                     <table class="table table-hover table-stripped" id="example2">
                         <thead>
-                        <tr class="table-info">
-                            <th>No.</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Aksi</th>
-                        </tr>
+                            <tr class="table-info">
+                                <th>No.</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Aksi</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $key => $user)
-                            <tr>
-                                <td>{{$key+1}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>
-                                    <a href="{{route('users.edit', $user)}}" class="btn btn-primary btn-sm">
-                                        Edit
-                                    </a>
-                                    <a href="{{route('users.destroy', $user)}}" onclick="notificationBeforeDelete(event, this)" class="btn btn-danger btn-sm">
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
+                            @foreach ($users as $key => $user)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
+                                    <td>
+                                        <a href="{{ route('users.edit', $user) }}" class="btn btn-primary btn-sm">
+                                            Edit
+                                        </a>
+                                        <a href="{{ route('users.destroy', $user) }}"
+                                            onclick="notificationBeforeDelete(event, this)" class="btn btn-danger btn-sm">
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -67,6 +70,5 @@
                 $("#delete-form").submit();
             }
         }
-
     </script>
 @endpush

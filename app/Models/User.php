@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role,'
     ];
 
     /**
@@ -41,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function adminlte_image()
+    {
+        // return '/../adminlte/vendor/img/user.png';
+    }
+    public static function adminlte_desc()
+    {
+        return 'ini cuma tes';
+    }
+
+    public static function adminlte_profile_url()
+    {
+        
+    }
+
 }

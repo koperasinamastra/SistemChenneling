@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Cabang;
 use App\Models\Debitur;
 use App\Models\Mitra;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +26,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Debitur::factory(20)->create();
+        User::factory(5)->create();
+        Debitur::factory(5)->create();
+        Cabang::factory(5)->create();
+        Mitra::factory(5)->create();
     }
 }

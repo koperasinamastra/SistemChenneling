@@ -67,7 +67,7 @@ class CabangController extends Controller
         }
 
        $cabang= Cabang::updateOrCreate([
-                    'id' => $request->mitra_id
+                    'id' => $request->cabang_id
                 ],
                 [
                     'NamaCabang' => $request->NamaCabang, 
