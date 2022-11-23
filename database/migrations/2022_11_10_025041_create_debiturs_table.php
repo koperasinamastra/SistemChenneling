@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('no_pengajuan');
             $table->string('nama_debitur');
+            $table->integer('cabang_id')->default();
             $table->string('noktp');
             $table->string('alamat');
             $table->string('tlp');
+            $table->integer('plafond');
             $table->string('email');
             $table->string('foto_ktp');
             $table->string('foto_kk');

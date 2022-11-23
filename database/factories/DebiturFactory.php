@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class DebiturFactory extends Factory
 {
     /**
-     * Define the model"s default state.
+     * Define the model's default state.
      *
      * @return array<string, mixed>
      */
@@ -19,9 +19,11 @@ class DebiturFactory extends Factory
         return [
             "no_pengajuan"=>$this->faker->randomNumber(9, true),
             "nama_debitur"=> $this->faker->name(),
+            "cabang_id"=>$this->faker->numerify('1'),
             "noktp"=>$this->faker->randomNumber(9, true),
             "alamat"=>$this->faker->address(),
             "tlp"=>$this->faker->e164PhoneNumber(),
+            "plafond"=>$this->faker->numerify('########'),
             "email"=> $this->faker->unique()->safeEmail(),
             "foto_ktp"=>$this->faker->imageUrl(640, 480, "animals", true),
             "foto_kk" =>$this->faker->imageUrl(640, 480, "animals", true),

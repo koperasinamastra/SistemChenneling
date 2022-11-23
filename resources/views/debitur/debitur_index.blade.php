@@ -1,21 +1,22 @@
 @extends('adminlte::page')
 
-@section('title', 'Data Debitur')
+@section('title', 'Namastra|Data Debitur ')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Data Debitur</h1>
+    <h1 class="m-0 text-dark">Manage Data Debitur</h1>
 @stop
 
 @section('content')
     <div class="row">
-        <div class="col-lg">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('debitur.create') }}" class="btn btn-primary mb-2">
-                        <i class="fa fa-plus" aria-hidden="true"></i> Tambah
-                    </a>
-                    <div class="table-responsive-sm">
-                        <table class="table table-hover table-stripped" id="example2">
+                    <!-- Button trigger modal -->
+                    <a class="btn btn-info" href="{{ route('debitur.create') }}" id="createNewDebitur"><i
+                            class="fa fa-plus-circle"> Tambah
+                            Debitur</i></a>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-stripped data-table" name="tabeldebitur" id="tabeldebitur">
                             <thead>
                                 <tr class="table-info">
                                     <th>No.</th>
@@ -28,39 +29,28 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($debitur as $key => $row)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $row->nama_debitur }}</td>
-                                        <td>{{ $row->alamat }}</td>
-                                        <td>{{ $row->email }}</td>
-                                        <td>{{ $row->tlp }}</td>
-                                        <td>{{ $row->plafond }}</td>
-                                        <td>{{ $row->cabang->NamaCabang }}</td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="#" onclick="notificationBeforeDelete(event, this)"
-                                                class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                            <a href="#" onclick="notificationBeforeDelete(event, this)"
-                                                class="btn btn-warning btn-sm">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="ajaxModel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modelHeading"></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="debiturForm" name="debiturForm" class="form-horizontal">
+                        <input type="hidden" name="debitur_id" id="debitur_id">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
+
 
 @push('js')
     <form action="" id="delete-form" method="post">
@@ -68,21 +58,95 @@
         @csrf
     </form>
     <script>
-        $('#example2').DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)')
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            /*Render DataTable*/
+
+            var table = $('#tabeldebitur').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('debitur.index') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'nama_debitur',
+                        name: 'nama_debitur'
+                    },
+                    {
+                        data: 'alamat',
+                        name: 'alamat'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'tlp',
+                        name: 'tlp'
+                    },
+                    {
+                        data: 'plafond',
+                        name: 'plafond'
+                    },
+                    {
+                        data: 'cabang_id',
+                        name: 'cabang_id'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+        });
+
+        $('body').on('click', '.deleteDebitur', function() {
+            let debitur_id = $(this).data('id');
+            let token = $('meta[name="csrf-token"]').attr('content');
+
+            Swal.fire({
+                title: 'Apakah Kamu Yakin?',
+                text: "ingin menghapus data ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'TIDAK',
+                confirmButtonText: 'YA, HAPUS!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    //fetch to delete data
+                    $.ajax({
+                        url: `/debitur/${debitur_id}`,
+                        type: "DELETE",
+                        cache: false,
+                        data: {
+                            "_token": token
+                        },
+                        success: function(response) {
+                            window.$('#tabeldebitur').DataTable().ajax.reload();
+                            //show success message
+                            Swal.fire({
+                                type: 'success',
+                                icon: 'success',
+                                title: `${response.message}`,
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                            //remove post on table
+                            $(`#index_${debitur_id}`).remove();
+                        }
+                    });
+                }
+            })
         })
-
-
-        function notificationBeforeDelete(event, el) {
-            event.preventDefault();
-            if (confirm('Apakah anda yakin akan menghapus data ? ')) {
-                $("#delete-form").attr('action', $(el).attr('href'));
-                $("#delete-form").submit();
-            }
-        }
     </script>
 @endpush

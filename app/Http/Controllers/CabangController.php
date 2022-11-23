@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cabang;
 use Illuminate\Http\Request;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
 class CabangController extends Controller
@@ -17,18 +17,18 @@ class CabangController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-  
+
             $data = Cabang::latest()->get();
-  
+
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-   
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editCabang">Edit</a>';
-   
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteCabang">Delete</a>';
+
+                        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editCabang">Edit</a>';
+
+                        $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteCabang">Delete</a>';
     
-                            return $btn;
+                        return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);

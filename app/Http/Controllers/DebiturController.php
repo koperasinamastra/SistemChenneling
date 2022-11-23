@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cabang;
 use App\Models\Debitur;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Contracts\DataTable;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
 class DebiturController extends Controller
 {
@@ -15,14 +14,32 @@ class DebiturController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   public function index(Request $request)
+    public function index(Request $request)
     {
-       $debitur = Debitur::all();
+        if ($request->ajax()) {
 
-       return view('debitur.debitur_index', [
-       'debitur' => $debitur
-       ]);
-       
+        $data = Debitur::latest()->get();
+
+        return DataTables::of($data)
+        ->addIndexColumn()
+         ->addColumn('cabang_id', function($data) {
+         return $data->cabang->NamaCabang;
+         })
+        ->addColumn('action', function($row){
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row->id.'" data-original-title="Edit"
+            class="edit btn btn-primary btn-sm editDebitur">Edit</a>';
+
+        $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row->id.'"
+            data-original-title="Delete" class="btn btn-danger btn-sm deleteDebitur">Delete</a>';
+
+        return $btn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+        }
+
+        return view('debitur.debitur_index');
     }
 
     /**
@@ -89,7 +106,13 @@ class DebiturController extends Controller
      */
     public function destroy($id)
     {
-        //
+         //delete post by ID
+         Debitur::where('id', $id)->delete();
+         //return response
+         return response()->json([
+         'success' => true,
+         'message' => 'Data Post Berhasil Dihapus!.',
+         ]);
     }
 
 }

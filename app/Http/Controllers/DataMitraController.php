@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use Illuminate\Http\Request;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
 class DataMitraController extends Controller
