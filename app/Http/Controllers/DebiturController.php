@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Cabang;
 use App\Models\Debitur;
+use App\Models\Image;
+use App\Models\TemporaryImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class DebiturController extends Controller
@@ -22,9 +27,9 @@ class DebiturController extends Controller
 
         return DataTables::of($data)
         ->addIndexColumn()
-         ->addColumn('cabang_id', function($data) {
-         return $data->cabang->NamaCabang;
-         })
+        ->addColumn('cabang_id', function($data) {
+            return $data->cabang->NamaCabang;
+        })
         ->addColumn('action', function($row){
 
         $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="'.$row->id.'" data-original-title="Edit"
@@ -83,7 +88,7 @@ class DebiturController extends Controller
      */
     public function edit($id)
     {
-        //
+        //  
     }
 
     /**

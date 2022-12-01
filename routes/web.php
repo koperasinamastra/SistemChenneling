@@ -3,7 +3,9 @@
 use App\Http\Controllers\CabangController;
 use App\Http\Controllers\DataMitraController;
 use App\Http\Controllers\DebiturController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PengajuanPinjamanController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Models\Cabang;
 use Illuminate\Support\Facades\Auth;
@@ -36,4 +38,15 @@ Route::middleware('auth')->group(function(){
     Route::resource('cabang', CabangController::class);
     Route::resource('debitur', DebiturController::class);
     Route::resource('pengajuanpinjaman', PengajuanPinjamanController::class);
+    Route::controller(ImageController::class)->group(function () {
+    Route::get('/image', 'index');
+    Route::post('/submit', 'store')->name('submitImage');
+    });
+    
+
+    //route filepond
+    Route::controller(UploadController::class)->group(function () {
+    Route::post('/upload', 'store')->name('upload');
+    Route::delete('/hapus', 'destroy')->name('hapus');
+    });
 });

@@ -22,7 +22,6 @@
                                     <th>No.</th>
                                     <th>Nama</th>
                                     <th>Alamat</th>
-                                    <th>Email</th>
                                     <th>Telepon</th>
                                     <th>Plafond</th>
                                     <th>Cabang</th>
@@ -82,10 +81,6 @@
                     {
                         data: 'alamat',
                         name: 'alamat'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
                     },
                     {
                         data: 'tlp',

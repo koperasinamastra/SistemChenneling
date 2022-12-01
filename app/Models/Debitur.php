@@ -9,7 +9,7 @@ use App\Models\Cabang;
 class Debitur extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama_debitur','alamat','email','tlp','plafond','cabang' ];
+    protected $fillable = ['nama_debitur','noktp','alamat','tlp','plafond','cabang_id' ];
 
     public function cabang()
     {
