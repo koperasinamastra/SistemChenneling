@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         for($i=0;$i<15;$i++){
-            $input = ['admin','editor','author'];
+            $input = ['user','admin','bank','cabang','pusat'];
             $rand_keys = array_rand($input);
 
             $data[$i]=[

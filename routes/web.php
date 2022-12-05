@@ -27,6 +27,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+// Route::resource('users', UserController::class);
 
 Route::get('/home', function () {
     return view('home');

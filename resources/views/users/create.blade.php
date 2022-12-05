@@ -13,7 +13,6 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-
                         <div class="form-group">
                             <label for="exampleInputName">Nama</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -22,7 +21,6 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
                         <div class="form-group">
                             <label for="exampleInputEmail">Email address</label>
                             <input type="email" class="form-control @error('email') is-invalid @enderror"
@@ -37,9 +35,10 @@
                                 Akses</label>
                             <select class="custom-select rounded-0" id="exampleSelectRounded0"
                                 class="form-control @error('role') is-invalid @enderror" name="role">
-                                <option>===Pilih Role Akses===</option>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
+                                <option>--Pilih Role Akses--</option>
+                                @foreach ($roles as $roles)
+                                    <option value="{{ $roles->NamaRole }}">{{ $roles->NamaRole }}</option>
+                                @endforeach
                             </select>
                             @error('role')
                                 <span class="text-danger">{{ $message }}</span>
@@ -58,9 +57,7 @@
                             <input type="password" class="form-control" id="exampleInputPassword"
                                 placeholder="Konfirmasi Password" name="password_confirmation">
                         </div>
-
                     </div>
-
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="{{ route('users.index') }}" class="btn btn-default">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -73,12 +75,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::all();
         $user = User::find($id);
         if (!$user) return redirect()->route('users.index')
             ->with('error_message', 'User dengan id' . $id . ' tidak ditemukan');
         return view('users.edit', [
             'user' => $user
-        ]);
+        ],compact('roles'));
     }
 
     /**

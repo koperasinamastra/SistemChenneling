@@ -15,7 +15,6 @@ class UploadController extends Controller
         //process upload from filepond
         $file = $request->file('image');
         $filename = hexdec(uniqid()).'.'.$file->extension();
-        // $filename = hexdec(uniqid()) . '.' . $file->extension();
         $folder = uniqid() . '-' . now()->timestamp;
         Session::put('folder', $folder); //save session  folder
         Session::put('filename', $filename); //save session filename
